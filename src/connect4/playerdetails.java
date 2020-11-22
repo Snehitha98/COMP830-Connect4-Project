@@ -15,14 +15,8 @@ public class playerdetails{
 		System.out.println("player 1 name: Computer");
 		System.out.println("Enter player 2 name: ");
 		String s = in.nextLine(); 
-        System.out.println("Please Choose one color between Red and yellow-Type in R or B: ");
-        String s2 = in.nextLine();
-        if(s2 == "R") {
-        	System.out.println("player 1 color is Blue");
-        }
-        if(s2 == "B") {
-        	System.out.println("player 1 color is RED");
-        }
+        System.out.println("Please Choose one color between Red and Blue-Type in R or B: ");
+        String s1 = in.nextLine();
 		levelofgame.level();
 	}
 	
@@ -30,13 +24,13 @@ public class playerdetails{
 		
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter player 1 name: ");
-		String s1 = in.nextLine(); 
-		System.out.println("Please Choose one color between Red and yellow-Type in R or B: ");
-        String s2 = in.nextLine(); 
+		String s2 = in.nextLine(); 
+		System.out.println("Please Choose one color between Red and Blue-Type in R or B: ");
+        String s3 = in.nextLine(); 
         
         
         System.out.println("Enter player 2 name: ");
-		String s3 = in.nextLine(); 		
+		String s4 = in.nextLine(); 		
 		levelofgame.level();
 		
 	}

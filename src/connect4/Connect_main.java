@@ -6,6 +6,13 @@ public class Connect_main {
 		
 		System.out.println("WELCOME TO CONNECT 4 GAME");
 		start s = new start();
+		
+		board b=board.createInstance();
+		
+    	b.Creategrid();
+    	b.displaygrid();
+		
+    	
 	}
 
 }

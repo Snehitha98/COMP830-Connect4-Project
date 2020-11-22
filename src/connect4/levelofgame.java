@@ -18,7 +18,7 @@ public class levelofgame {
 		
 		if (a==1) {
 			System.out.println("you have selected easy game");
-			
+
 		}
 		if (a==2) {
 			System.out.println("you have selected medium level game");
