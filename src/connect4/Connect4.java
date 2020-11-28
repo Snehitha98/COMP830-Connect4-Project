@@ -1,5 +1,6 @@
 package connect4;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Connect4 {
@@ -41,7 +42,7 @@ public class Connect4 {
         for (int i = 0; i < players.length; i++) {
             players[i] = new Player();
         }
-
+        
         userInput = new Scanner(System.in);
     }
 
@@ -55,13 +56,13 @@ public class Connect4 {
         while (runGame) {
 
             System.out.println("Now " + players[0].getName() + " should play");
-            processChecks();
+            enterinput();
             userChance("R");
             this.moves = this.moves + 1;
 
 
             System.out.println("Now " + players[1].getName() + " should play");
-            processChecks();
+            enterinput();
             userChance("B");
             this.moves = this.moves + 1;
 
@@ -69,8 +70,10 @@ public class Connect4 {
 
     }
 
-    public void processChecks(){
+    public void enterinput(){
+    	
         System.out.println("Please enter a column number between 1 to "+columns);
+        
         board.printBoard();
         rule.checkDraw(this.moves);
     }
@@ -81,13 +84,15 @@ public class Connect4 {
         boolean process = true;
 
         while (process) {
+        	
+        	
 
             if (!userInput.hasNextInt()) {
-                //if the user has entered the non-integer, then warn the user
+                //if the user has entered the non-integer
                 System.out.println(player + " please enter a column number between 1 to "+columns);
                 userInput.next();
             }
-            //if the user has not entered wrong input, then curry on updating the board
+            //if the user has not entered wrong input, then update the board
             else {
 
                 int input_number = userInput.nextInt(); //take user input as integer
@@ -126,14 +131,23 @@ public class Connect4 {
 			System.out.println("Type in 1 or 2 ");		
 			int a = in.nextInt(); 
 			if(a==1) {
+				
+				System.out.println("Player1 is Computer");
+				players[0].setType("R");
+				players[0].setName("Computer");
+				System.out.println("Enter Player2 name:");
+				players[0].setType("B");
+				players[1].setName(userInput.next());
 				System.exit(0);
 			}
+			
+			
 			if(a==2) {
-            System.out.println("Player 1 please enter your name?");
+            System.out.println("Player 1 please enter your name: ");
             players[0].setType("R");
             players[0].setName(userInput.next());
 
-            System.out.println("Player 2 please enter your name?");
+            System.out.println("Player 2 please enter your name: ");
             players[1].setType("B");
             players[1].setName(userInput.next());
 

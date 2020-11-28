@@ -20,8 +20,8 @@ public class Player {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(String string) {
+        this.type = string;
     }
 
     public String toString() {

@@ -7,9 +7,9 @@ public class Board {
     private int rows = 0;
     private int column = 0;
 
-    Board(int _rows, int _column) {
-        this.rows = _rows;
-        this.column = _column;
+    Board(int rows, int column) {
+        this.rows = rows;
+        this.column = column;
         this.matrix = new String[rows][column];
     }
 

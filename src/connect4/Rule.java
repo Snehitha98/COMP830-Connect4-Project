@@ -6,9 +6,9 @@ public class Rule {
 
     private String matrix[][];
 
-    public Rule(Board _board) {
+    public Rule(Board board) {
 
-        this.board = _board;
+        this.board = board;
 
         this.matrix = this.board.getConnect4();
     }
@@ -41,7 +41,11 @@ public class Rule {
         if (totalMoves == total) {
             System.out.println("Draw!");
             System.out.println("GAME OVER!");
-            System.exit(0);
+            
+            NextGame n = new NextGame();
+            n.newgame();
+            
+//            System.exit(0);
         }
 
     }
@@ -115,7 +119,7 @@ public class Rule {
 
             verifyResult(count,player);
 
-        } // end loop
+        } 
     }
 
     public void verifyResult(int count, String player) {
@@ -123,10 +127,14 @@ public class Rule {
         int total = 4;
 
         if (count == total) {
-            System.out.println("Player: "+player+" Win!");
-            System.out.println("GAME OVER!");
+            System.out.println("Player: "+player+" Won!");
+            System.out.println("GAME OVER!!!!!!!!!!!!");
             board.printBoard();
-            System.exit(0);
+            
+            NextGame n = new NextGame();
+            n.newgame();
+            
+//            System.exit(0);
         }
 
 
