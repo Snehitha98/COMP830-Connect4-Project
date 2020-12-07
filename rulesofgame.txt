@@ -1,22 +1,23 @@
 
-
 ===========================================================================================================================
 
 GAME RULES:
 
 What Is Connect Four?
 
-Connect Four is a two player game.
-The board game is a two-dimensional grid of points where playing chips may be placed.
-Each player has a different color (or symbol for) their chips.
-The board game starts out empty.
-Players take turns placing their chips on the board, one at a time.
-A playing chip is placed on the board by choosing a column into which to "drop" the chip. The chip starts in the highest row and then then "falls" down to the lowest point available in that column.
-A column may become full and then no more playing chips may be dropped into that column.
-A player wins the game as soon as four of his playing chips occupy consecutive horizontal, vertical, or diagonal points on the game board.
-If all of the points on the board fill up without any player winning, then the game ends in a draw.
 
-
+1. Connect 4 is a two player game.
+2. In this game we have two options, either to play with computer or with another player.
+3. The game board starts out empty.
+4. Players can enter the column number where they want to drop the coin.
+5. A column may become full and then no more playing coins may be dropped into that column, so we need to enter another column number.
+6. Player who makes first four's of horizontal or vertical or diagonal coins wins the game. 
+7. If all of the points on the board fill up without any player winning, then the game ends in a draw.
+8. Finally, The game displays who won the game.
+9. We have another option to play another game.
+10. If we type yes, then you can play another game.
+11. If no, then it will display number of games you played.
+12. That is end of the game.
 
 ==============================================================================================================================
 

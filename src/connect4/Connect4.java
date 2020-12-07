@@ -1,18 +1,16 @@
 package connect4;
-
-import java.util.Random;
 import java.util.Scanner;
 
 public class Connect4 {
 
-    private Board board;
-    private Player[] players;
-    private Scanner userInput;
-    private Rule rule;
-    private boolean runGame = true;
-    private final int rows = 6;
-    private final int columns = 6;
-    private int moves =0;
+    public Grid grid;
+    public Gamer[] gamer;
+    public Scanner input;
+    public Instructions instruction;
+    public boolean cgame = true;
+    public int rows = 6;
+    public int columns = 6;
+    public int drop =0;
    
    	private static Connect4 singletonInstance = null;
    	public static Connect4 createInstance() 
@@ -36,50 +34,47 @@ public class Connect4 {
    	}
 
     public Connect4() {
-        players = new Player[2];
-        board = new Board(this.rows, this.columns);
-        rule = new Rule(board);
-        for (int i = 0; i < players.length; i++) {
-            players[i] = new Player();
+        gamer = new Gamer[2];
+        grid = new Grid(this.rows, this.columns);
+        instruction = new Instructions(grid);
+        for (int j = 0; j < gamer.length; j++) {
+        	gamer[j] = new Gamer();
         }
         
-        userInput = new Scanner(System.in);
+        input = new Scanner(System.in);
     }
 
-    public void run() {
+    public void play() {
 
     	initialize_players();
-        board.initialize_Board();
-        board.printBoard();
+        grid.initialize_Board();
+        grid.printGrid();
+        while (cgame) {
+
+            System.out.println("Now " + gamer[0].getUserName() + " should play");
+            typeinput();
+            inputchance("R");
+            this.drop = this.drop + 1;
 
 
-        while (runGame) {
-
-            System.out.println("Now " + players[0].getName() + " should play");
-            enterinput();
-            userChance("R");
-            this.moves = this.moves + 1;
-
-
-            System.out.println("Now " + players[1].getName() + " should play");
-            enterinput();
-            userChance("B");
-            this.moves = this.moves + 1;
+            System.out.println("Now " + gamer[1].getUserName() + " should play");
+            typeinput();
+            inputchance("B");
+            this.drop = this.drop + 1;
 
         }
 
     }
 
-    public void enterinput(){
+    public void typeinput(){
     	
-        System.out.println("Please enter a column number between 1 to "+columns);
-        
-        board.printBoard();
-        rule.checkDraw(this.moves);
+        System.out.println("Please enter a column number between 1 to 6");
+        grid.printGrid();
+        instruction.Draw(this.drop);
     }
 
 
-    private void userChance(String player) {
+    private void inputchance(String player) {
 
         boolean process = true;
 
@@ -87,30 +82,26 @@ public class Connect4 {
         	
         	
 
-            if (!userInput.hasNextInt()) {
-                //if the user has entered the non-integer
-                System.out.println(player + " please enter a column number between 1 to "+columns);
-                userInput.next();
+            if (!input.hasNextInt()) {
+                System.out.println(player + " please enter a column number between 1 to 6");
+                input.next();
             }
-            //if the user has not entered wrong input, then update the board
             else {
 
-                int input_number = userInput.nextInt(); //take user input as integer
+                int input_number = input.nextInt(); 
 
                 if (input_number > 0 && input_number <= columns) {
-
-
-                    if (rule.invalidinput(input_number)) {
+                    if (instruction.wronginput(input_number)) {
                         System.out.println(player + " the column " + input_number
-                                + " already full, choose another column number");
+                                + " is full, please type another column number");
                     } else {
-                        board.updateBoard(input_number, player);
-                        rule.isConnected(input_number,player);
-                        process = false; // close
+                        grid.update(input_number, player);
+                        instruction.logic(input_number,player);
+                        process = false; 
 
                     }
                 } else {
-                    System.out.println(player + " please enter a column number between 1 to "+columns);
+                    System.out.println(player + " please enter a column number between 1 to 6");
                 }
 
 
@@ -122,9 +113,9 @@ public class Connect4 {
 
     private void initialize_players() {
 
-        boolean run = true;
+        boolean play = true;
 
-        while (run) {
+        while (play) {
         	Scanner in = new Scanner(System.in);
 
         	System.out.println("Choose number of players: ");
@@ -133,26 +124,68 @@ public class Connect4 {
 			if(a==1) {
 				
 				System.out.println("Player1 is Computer");
-				players[0].setType("R");
-				players[0].setName("Computer");
+				gamer[0].setDataType("R");
+				gamer[0].setUserName("Computer");
 				System.out.println("Enter Player2 name:");
-				players[0].setType("B");
-				players[1].setName(userInput.next());
-				System.exit(0);
+				gamer[0].setDataType("B");
+				gamer[1].setUserName(input.next());
+				
+				if (gamer[0].getUserName().length() > 0 && gamer[1].getUserName().length() > 0) {
+	                play = false;
+	            }
+				
+				Computer c = new Computer();
+	    	    String[][] grid = c.creategrid();
+	    	    boolean game = true;
+	    	    
+	    	    int x = 0;
+	    	    c.displaygrid(grid);
+	    	    while(game) {
+	    	      if (x % 2 == 0) {
+	    	    	  c.CompChance(grid);
+	    	      }
+	    	      else { 
+	    	    	  c.gamerChance(grid);
+	    	      }
+	    	      x = x + 1;
+	    	      c.displaygrid(grid);
+	    	      
+	    	      if (c.logic(grid) != null) {
+	    	        if (c.logic(grid) == "R"){
+	    	           System.out.println("Computer won the game");
+	    	           System.out.println("*******************GAME OVER!!!!!!!!!!!!*************");
+	    	           
+	    	           NewGame n = new NewGame();
+	    	           n.newgame();
+	    	           
+	    	        } else if (c.logic(grid)== "B") {
+	    	          System.out.println("Player won the game");
+	    	          System.out.println("*******************GAME OVER!!!!!!!!!!!!*************");
+	    	          
+	    	          NewGame n = new NewGame();
+	    	          n.newgame();
+	    	        }
+	    	        
+	    	        game = false;
+	    	      }
+	    	    }
+	    	    
+	    	    System.exit(0);
+			
 			}
 			
 			
 			if(a==2) {
             System.out.println("Player 1 please enter your name: ");
-            players[0].setType("R");
-            players[0].setName(userInput.next());
+            gamer[0].setDataType("R");
+            gamer[0].setUserName(input.next());
 
             System.out.println("Player 2 please enter your name: ");
-            players[1].setType("B");
-            players[1].setName(userInput.next());
+            gamer[1].setDataType("B");
+            gamer[1].setUserName(input.next());
 
-            if (players[0].getName().length() > 0 && players[1].getName().length() > 0) {
-                run = false;
+            if (gamer[0].getUserName().length() > 0 && gamer[1].getUserName().length() > 0) {
+                play = false;
             }
         }
         }

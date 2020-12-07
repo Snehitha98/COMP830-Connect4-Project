@@ -2,7 +2,7 @@ package connect4;
 
 import java.util.Scanner;
 
-public class NextGame {
+public class NewGame {
 	
 	
 	static int count = 1;
@@ -22,7 +22,7 @@ public class NextGame {
 			count = count + 1;
 			
 			Connect4 c = Connect4.createInstance();
-		    c.run();
+		    c.play();
 			
 			
 		}
@@ -30,7 +30,8 @@ public class NextGame {
 		else {
 			
 			
-			System.out.println("Total number of games palyed " + count);
+			System.out.println("Total number of games played " + count);
+			System.out.println("Thank you for playing the game!!!!!!!!!!!!!!!!!!");
 			System.exit(0);
 		}
 	}

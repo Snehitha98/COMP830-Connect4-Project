@@ -1,6 +1,9 @@
 package connect4;
-import java.io.*;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 public class Fileread {
 	
@@ -9,28 +12,25 @@ public class Fileread {
 
 		 try{
 			 
-			  FileInputStream fstream = new FileInputStream("rulesofgame.txt");
+			  FileInputStream file = new FileInputStream("rulesofgame.txt");
 			  
-			  //object of DataInputStream
 			  
-			  DataInputStream in1 = new DataInputStream(fstream);
+			  DataInputStream input = new DataInputStream(file);
 			  
-			  BufferedReader br = new BufferedReader(new InputStreamReader(in1));
-			  String strLine;
+			  BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+			  String Line;
 			  
-			  //Read text file Line By Line
 			  
-			  while ((strLine = br.readLine()) != null)   {
+			  while ((Line = reader.readLine()) != null)   {
 				  
-			  System.out.println (strLine);
+			  System.out.println (Line);
 			  
 			  }
 			    
-			  //Close the input stream
-			  in1.close();
+			  input.close();
 			  
-			    }catch (Exception e){//Catch exception if any
-			  System.err.println("Error: " + e.getMessage());
+			    }catch (Exception e){
+			  System.err.println("This is the error" + e.getMessage());
 			  }
 			  }
 		
